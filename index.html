@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Las Siete y Media</title>
+    <link rel="stylesheet" href="src/style.css" />
+    <script type="module" src="/src/main.ts"></script>
+  </head>
+  <body>
+    <header>
+      <h1>JUEGO DE LAS SIETE Y MEDIA</h1>
+    </header>
+    <div class="container-puntuacion">
+      <h3>Puntuación actual:</h3>
+      <div class="puntuacion"></div>
+      <div id="game-over"></div>
+      <div id="mensaje-me-planto"></div>
+    </div>
+    <div class="main-container">
+      <div class="empty-column"></div>
+      <div class="center-column">
+        <div class="carta">
+          <img
+            src="https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/cartas/back.jpg"
+            alt="carta boca abajo"
+          />
+        </div>
+      </div>
+      <div class="botones">
+        <button id="pedir-carta">Pedir Carta</button>
+        <button id="me-planto">Me Planto</button>
+        <button id="nueva-partida" disabled>Nueva Partida</button>
+        <button id="saber-resultado" disabled>Siguiente Carta</button>
+      </div>
+    </div>
+  </body>
+</html>

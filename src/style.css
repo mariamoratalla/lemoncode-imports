@@ -1,0 +1,93 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap");
+body,
+h1,
+h3,
+button,
+p {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #f0f0f0;
+  text-align: center;
+}
+
+header {
+  background-color: #333;
+  color: white;
+  padding: 20px;
+}
+
+.container-puntuacion {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.puntuacion {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.main-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.empty-column {
+  flex: 1;
+}
+
+.center-column {
+  flex: 1;
+}
+
+.botones {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  gap: 5px;
+  align-items: center;
+  margin-right: 80px;
+}
+
+button {
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+button:disabled {
+  background-color: darkseagreen;
+  cursor: auto;
+}
+
+.carta img {
+  width: 200px;
+  height: auto;
+}
+
+@media (max-width: 768px) {
+  .botones {
+    grid-template-columns: repeat(1, auto);
+    justify-items: center;
+    margin-right: 0;
+  }
+
+  button {
+    margin: 4px 2px;
+  }
+}
