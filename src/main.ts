@@ -1,15 +1,4 @@
-let puntuacion = 0;
-
-const AS = 1;
-const DOS = 2;
-const TRES = 3;
-const CUATRO = 4;
-const CINCO = 5;
-const SEIS = 6;
-const SIETE = 7;
-const SOTA = 10;
-const CABALLO = 11;
-const REY = 12;
+import { Carta, partida } from "./modelo";
 
 const puntos = document.querySelector(".puntuacion") as HTMLElement;
 const botonCarta = document.getElementById("pedir-carta") as HTMLButtonElement;
@@ -29,29 +18,29 @@ const botonResultado = document.getElementById(
 ) as HTMLButtonElement;
 
 const muestraPuntuacion = () => {
-  puntos.innerHTML = puntuacion.toString();
+  puntos.innerHTML = partida.puntuacion.toString();
 };
 muestraPuntuacion();
 
 const actualizarPuntuacion = (carta: number) => {
   if (carta >= 1 && carta <= 7) {
-    puntuacion = puntuacion + carta;
+    partida.puntuacion = partida.puntuacion + carta;
   } else {
-    puntuacion = puntuacion + 0.5;
+    partida.puntuacion = partida.puntuacion + 0.5;
   }
   muestraPuntuacion();
 };
 
 const pedirCarta = () => {
-  let carta = Math.floor(Math.random() * 10) + 1;
+  let carta: Carta = (Math.floor(Math.random() * 10) + 1) as Carta;
   if (carta > 7) {
-    carta = carta + 2;
+    carta = (carta + 2) as Carta;
   }
 
   muestraCarta(carta);
   actualizarPuntuacion(carta);
 
-  if (puntuacion > 7.5) {
+  if (partida.puntuacion > 7.5) {
     botonCarta.disabled = true;
     botonPlantarse.disabled = true;
     botonNuevaPartida.disabled = false;
@@ -59,7 +48,7 @@ const pedirCarta = () => {
     gameOver.innerHTML = "GAME OVER!!!!!!!";
   }
 
-  if (puntuacion === 7.5) {
+  if (partida.puntuacion === 7.5) {
     botonCarta.disabled = true;
     botonPlantarse.disabled = true;
     botonNuevaPartida.disabled = false;
@@ -68,54 +57,54 @@ const pedirCarta = () => {
   botonResultado.disabled = true;
 };
 
-const muestraCarta = (carta: number): void => {
+const muestraCarta = (carta: Carta): void => {
   switch (carta) {
-    case AS:
+    case 1:
       imagen.src =
         "https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/cartas/copas/1_as-copas.jpg";
       imagen.alt = "AS DE COPAS";
       break;
-    case DOS:
+    case 2:
       imagen.src =
         "https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/cartas/copas/2_dos-copas.jpg";
       imagen.alt = "DOS DE COPAS";
       break;
-    case TRES:
+    case 3:
       imagen.src =
         "https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/cartas/copas/3_tres-copas.jpg";
       imagen.alt = "TRES DE COPAS";
       break;
-    case CUATRO:
+    case 4:
       imagen.src =
         "https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/cartas/copas/4_cuatro-copas.jpg";
       imagen.alt = "CUATRO DE COPAS";
       break;
-    case CINCO:
+    case 5:
       imagen.src =
         "https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/cartas/copas/5_cinco-copas.jpg";
       imagen.alt = "CINCO DE COPAS";
       break;
-    case SEIS:
+    case 6:
       imagen.src =
         "https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/cartas/copas/6_seis-copas.jpg";
       imagen.alt = "SEIS DE COPAS";
       break;
-    case SIETE:
+    case 7:
       imagen.src =
         "https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/cartas/copas/7_siete-copas.jpg";
       imagen.alt = "SIETE DE COPAS";
       break;
-    case SOTA:
+    case 10:
       imagen.src =
         "https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/cartas/copas/10_sota-copas.jpg";
       imagen.alt = "SOTA DE COPAS";
       break;
-    case CABALLO:
+    case 11:
       imagen.src =
         "https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/cartas/copas/11_caballo-copas.jpg";
       imagen.alt = "CABALLO DE COPAS";
       break;
-    case REY:
+    case 12:
       imagen.src =
         "https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/cartas/copas/12_rey-copas.jpg";
       imagen.alt = "REY DE COPAS";
@@ -130,16 +119,16 @@ const plantarse = () => {
   botonNuevaPartida.disabled = false;
 
   switch (true) {
-    case puntuacion <= 4:
+    case partida.puntuacion <= 4:
       mensajePlantarse.innerHTML = "Has sido muy conservador!";
       break;
-    case puntuacion > 4 && puntuacion < 6:
+    case partida.puntuacion > 4 && partida.puntuacion < 6:
       mensajePlantarse.innerHTML = "Te ha entrado el canguelo eh?";
       break;
-    case puntuacion >= 6 || puntuacion <= 7:
+    case partida.puntuacion >= 6 || partida.puntuacion <= 7:
       mensajePlantarse.innerHTML = "Casi casi...";
       break;
-    case puntuacion === 7.5:
+    case partida.puntuacion === 7.5:
       mensajePlantarse.innerHTML = "¡Lo has clavado! ¡Enhorabuena!";
     default:
       mensajePlantarse.innerHTML = "Ha habido un error con la puntuación";
@@ -148,7 +137,7 @@ const plantarse = () => {
 };
 
 const reset = () => {
-  puntuacion = 0;
+  partida.puntuacion = 0;
   muestraPuntuacion();
   botonCarta.disabled = false;
   botonPlantarse.disabled = false;
@@ -166,26 +155,26 @@ const saberResultado = () => {
   let valorSiguienteCarta = Math.floor(Math.random() * 10) + 1;
   let nombreSiguienteCarta = valorSiguienteCarta;
 
-  if (puntuacion < 7) {
+  if (partida.puntuacion <= 7) {
     if (valorSiguienteCarta > 7) {
       nombreSiguienteCarta = valorSiguienteCarta + 2;
       valorSiguienteCarta = 0.5;
     }
 
     mensaje += `${nombreSiguienteCarta} de copas. `;
-    puntuacion += valorSiguienteCarta;
+    partida.puntuacion += valorSiguienteCarta;
   }
 
-  if (puntuacion === 7.5) {
+  if (partida.puntuacion === 7.5) {
     botonResultado.disabled = true;
     mensaje += `Habrías ganado el juego. `;
   }
 
-  if (puntuacion > 7.5) {
+  if (partida.puntuacion > 7.5) {
     botonResultado.disabled = true;
     mensaje += `Ya habrías alcanzado una puntuación mayor que 7.5.`;
   } else {
-    mensaje += `La puntuación final sería: ${puntuacion.toFixed(1)}`;
+    mensaje += `La puntuación final sería: ${partida.puntuacion.toFixed(1)}`;
   }
 
   alert(mensaje);
