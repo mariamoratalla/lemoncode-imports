@@ -16,11 +16,11 @@ export const elementosDOM = {
   ) as HTMLButtonElement,
 };
 
-export const muestraPuntuacion = () => {
+export function muestraPuntuacion() {
   elementosDOM.puntos.innerHTML = partida.puntuacion.toString();
-};
+}
 
-export const pedirCarta = () => {
+export function pedirCarta() {
   let carta: Carta = generarNumero() as Carta;
   if (carta > 7) {
     carta = (carta + 2) as Carta;
@@ -44,9 +44,9 @@ export const pedirCarta = () => {
     elementosDOM.gameOver.innerHTML = "HAS GANADO 🥳🥳🥳🥳🥳";
   }
   elementosDOM.botonResultado.disabled = true;
-};
+}
 
-const muestraCarta = (carta: Carta): void => {
+function muestraCarta(carta: Carta): void {
   switch (carta) {
     case 1:
       elementosDOM.imagen.src =
@@ -99,9 +99,9 @@ const muestraCarta = (carta: Carta): void => {
       elementosDOM.imagen.alt = "REY DE COPAS";
       break;
   }
-};
+}
 
-export const plantarse = () => {
+export function plantarse() {
   elementosDOM.botonCarta.disabled = true;
   elementosDOM.botonPlantarse.disabled = true;
   elementosDOM.botonResultado.disabled = false;
@@ -125,9 +125,9 @@ export const plantarse = () => {
         "Ha habido un error con la puntuación";
       break;
   }
-};
+}
 
-export const reset = () => {
+export function nuevaPartida() {
   partida.puntuacion = 0;
   muestraPuntuacion();
   elementosDOM.botonCarta.disabled = false;
@@ -139,4 +139,5 @@ export const reset = () => {
   elementosDOM.imagen.src =
     "https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/cartas/back.jpg";
   elementosDOM.imagen.alt = "carta boca abajo";
-};
+}
+

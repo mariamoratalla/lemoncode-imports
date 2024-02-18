@@ -1,11 +1,11 @@
 import { partida } from "./modelo";
 import { elementosDOM, muestraPuntuacion } from "./ui";
 
-export const generarNumero = () => {
+export function generarNumero() {
     return Math.floor(Math.random() * 10) + 1;
   };
 
-export const actualizarPuntuacion = (carta: number) => {
+export function actualizarPuntuacion(carta: number) {
   if (carta >= 1 && carta <= 7) {
     partida.puntuacion = partida.puntuacion + carta;
   } else {
@@ -14,7 +14,7 @@ export const actualizarPuntuacion = (carta: number) => {
   muestraPuntuacion();
 };
 
-export const saberResultado = () => {
+export function saberResultado() {
     let mensaje = "La siguiente carta hubiese sido esta: ";
     let valorSiguienteCarta = generarNumero();
     let nombreSiguienteCarta = valorSiguienteCarta;
