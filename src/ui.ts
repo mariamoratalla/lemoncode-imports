@@ -124,6 +124,7 @@ export function handlePlantarse() {
   deshabilitarBoton(botonPlantarse);
   habilitarBoton(botonNuevaPartida);
   habilitarBoton(botonResultado);
+  finalizarPartidaEstado()
 
   let mensajeMePlanto = "";
 
