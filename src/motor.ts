@@ -1,45 +1,64 @@
-import { partida } from "./modelo";
-import { elementosDOM, muestraPuntuacion } from "./ui";
+import { Carta, partida } from "./modelo";
 
 export function generarNumero() {
-    return Math.floor(Math.random() * 10) + 1;
-  };
+  return Math.floor(Math.random() * 10) + 1;
+}
 
 export function actualizarPuntuacion(carta: number) {
   if (carta >= 1 && carta <= 7) {
-    partida.puntuacion = partida.puntuacion + carta;
+    partida.puntuacion += carta;
   } else {
-    partida.puntuacion = partida.puntuacion + 0.5;
+    partida.puntuacion += 0.5;
   }
-  muestraPuntuacion();
-};
+}
 
-export function saberResultado() {
-    let mensaje = "La siguiente carta hubiese sido esta: ";
-    let valorSiguienteCarta = generarNumero();
-    let nombreSiguienteCarta = valorSiguienteCarta;
-  
-    if (partida.puntuacion <= 7) {
-      if (valorSiguienteCarta > 7) {
-        nombreSiguienteCarta = valorSiguienteCarta + 2;
-        valorSiguienteCarta = 0.5;
-      }
-  
-      mensaje += `${nombreSiguienteCarta} de copas. `;
-      partida.puntuacion += valorSiguienteCarta;
+export function pedirCarta(): Carta {
+  let numero = generarNumero();
+  let carta: Carta;
+
+  if (numero > 7) {
+    carta = (numero + 2) as Carta;
+  } else {
+    carta = numero as Carta;
+  }
+  partida.estado = "jugando";
+
+  return carta;
+}
+
+export function siguienteCarta() {
+  let mensaje = "La siguiente carta hubiese sido esta: ";
+  let valorSiguienteCarta = generarNumero();
+  let nombreSiguienteCarta = valorSiguienteCarta;
+
+  if (partida.puntuacion <= 7) {
+    if (valorSiguienteCarta > 7) {
+      nombreSiguienteCarta = valorSiguienteCarta + 2;
+      valorSiguienteCarta = 0.5;
     }
-  
-    if (partida.puntuacion === 7.5) {
-      elementosDOM.botonResultado.disabled = true;
-      mensaje += `Habrías ganado el juego. `;
-    }
-  
-    if (partida.puntuacion > 7.5) {
-      elementosDOM.botonResultado.disabled = true;
-      mensaje += `Ya habrías alcanzado una puntuación mayor que 7.5.`;
-    } else {
-      mensaje += `La puntuación final sería: ${partida.puntuacion.toFixed(1)}`;
-    }
-  
-    alert(mensaje);
-  };
+
+    mensaje += `${nombreSiguienteCarta} de copas. `;
+    partida.puntuacion += valorSiguienteCarta;
+  }
+
+  if (partida.puntuacion === 7.5) {
+    mensaje += `Habrías ganado el juego. `;
+  }
+
+  if (partida.puntuacion > 7.5) {
+    mensaje += `Ya habrías alcanzado una puntuación mayor que 7.5.`;
+  } else {
+    mensaje += `La puntuación final sería: ${partida.puntuacion.toFixed(1)}`;
+  }
+
+  return mensaje;
+}
+
+export function nuevaPartidaLogica() {
+  partida.puntuacion = 0;
+  partida.estado = "no inicializada";
+}
+
+export function finalizarPartidaEstado() {
+  partida.estado = 'finalizada'
+}

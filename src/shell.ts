@@ -1,8 +1,28 @@
-import { saberResultado } from "./motor";
-import { elementosDOM, nuevaPartida, pedirCarta, plantarse } from "./ui";
+import {
+  botonCarta,
+  botonNuevaPartida,
+  botonPlantarse,
+  botonResultado,
+  handleNuevaPartida,
+  handlePedirCarta,
+  handlePlantarse,
+  handleSiguienteCarta
+} from "./ui";
 
-document.addEventListener("DOMContentLoaded", nuevaPartida);
-elementosDOM.botonCarta.addEventListener("click", pedirCarta);
-elementosDOM.botonPlantarse.addEventListener("click", plantarse);
-elementosDOM.botonNuevaPartida.addEventListener("click", nuevaPartida);
-elementosDOM.botonResultado.addEventListener("click", saberResultado);
+document.addEventListener("DOMContentLoaded", handleNuevaPartida);
+
+if (botonCarta && botonCarta instanceof HTMLButtonElement) {
+  botonCarta.addEventListener("click", handlePedirCarta);
+}
+
+if (botonPlantarse && botonPlantarse instanceof HTMLButtonElement) {
+  botonPlantarse.addEventListener("click", handlePlantarse);
+}
+
+if (botonNuevaPartida && botonNuevaPartida instanceof HTMLButtonElement) {
+  botonNuevaPartida.addEventListener("click", handleNuevaPartida);
+}
+
+if (botonResultado && botonResultado instanceof HTMLButtonElement) {
+  botonResultado.addEventListener("click", handleSiguienteCarta);
+}
