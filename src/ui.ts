@@ -7,20 +7,20 @@ import {
   siguienteCarta,
 } from "./motor";
 
-export const puntos = document.querySelector(".puntuacion") as HTMLElement;
+const puntos = document.querySelector(".puntuacion") as HTMLElement;
 export const botonCarta = document.getElementById(
   "pedir-carta"
 ) as HTMLButtonElement;
 export const botonPlantarse = document.getElementById(
   "me-planto"
 ) as HTMLButtonElement;
-export const mensajePlantarse = document.getElementById(
+const mensajePlantarse = document.getElementById(
   "mensaje-me-planto"
 ) as HTMLElement;
-export const mensajeRestultado = document.getElementById(
+const mensajeRestultado = document.getElementById(
   "mensaje-resultado"
 ) as HTMLElement;
-export const imagen = document.querySelector("img") as HTMLImageElement;
+const imagen = document.querySelector("img") as HTMLImageElement;
 export const botonNuevaPartida = document.getElementById(
   "nueva-partida"
 ) as HTMLButtonElement;
@@ -28,23 +28,23 @@ export const botonResultado = document.getElementById(
   "saber-resultado"
 ) as HTMLButtonElement;
 
-export function muestraPuntuacion() {
+function muestraPuntuacion() {
   puntos.innerHTML = partida.puntuacion.toString();
 }
 
-export function habilitarBoton(boton: HTMLButtonElement) {
+function habilitarBoton(boton: HTMLButtonElement) {
   if (boton && boton instanceof HTMLButtonElement) {
     boton.disabled = false;
   }
 }
 
-export function deshabilitarBoton(boton: HTMLButtonElement) {
+function deshabilitarBoton(boton: HTMLButtonElement) {
   if (boton && boton instanceof HTMLButtonElement) {
     boton.disabled = true;
   }
 }
 
-export function mostrarCarta(carta: Carta): void {
+function mostrarCarta(carta: Carta): void {
   if (imagen && imagen instanceof HTMLImageElement) {
     switch (carta) {
       case 1:
@@ -106,7 +106,7 @@ export function mostrarCarta(carta: Carta): void {
   }
 }
 
-export function finalizarPartida(puntuacion: number, mensaje: string) {
+function finalizarPartida(puntuacion: number, mensaje: string) {
   if (
     (puntuacion > 7.5 || puntuacion === 7.5) &&
     mensajeRestultado instanceof HTMLElement
@@ -124,7 +124,7 @@ export function handlePlantarse() {
   deshabilitarBoton(botonPlantarse);
   habilitarBoton(botonNuevaPartida);
   habilitarBoton(botonResultado);
-  finalizarPartidaEstado()
+  finalizarPartidaEstado();
 
   let mensajeMePlanto = "";
 

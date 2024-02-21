@@ -1,6 +1,6 @@
 import { Carta, partida } from "./modelo";
 
-export function generarNumero() {
+function generarNumero() {
   return Math.floor(Math.random() * 10) + 1;
 }
 
@@ -60,5 +60,5 @@ export function nuevaPartidaLogica() {
 }
 
 export function finalizarPartidaEstado() {
-  partida.estado = 'finalizada'
+  partida.estado = "finalizada";
 }
